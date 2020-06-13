@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment # pod, service or deployment
+metadata:
+  name: worker-deployment # name of deployment
+spec:
+  replicas: 1 # no of instances
+  selector:
+    matchLabels:
+      component: worker # selector of container
+  template:
+    metadata:
+      labels:
+        component: worker
+    spec:
+      containers:
+        - name: worker # name of container
+          image: awais1331/multi-worker # url of image dockerId/image-name
+          env:
+            - name: REDIS_HOST
+              value: redis-cluster-ip-service
+            - name: REDIS_PORT
+              value: "6379"

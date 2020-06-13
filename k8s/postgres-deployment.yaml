@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment # pod, service or deployment
+metadata:
+  name: postgres-deployment # name of deployment
+spec:
+  replicas: 1 # no of instances
+  selector:
+    matchLabels:
+      component: postgres # selector of container
+  template:
+    metadata:
+      labels:
+        component: postgres
+    spec:
+      volumes: # use to store data separate. not in container.
+        - name: postgres-storage # used on line # 25
+          persistentVolumeClaim:
+            claimName: database-persistent-volume-claim # name is volume file (data-persistent-volume-claim.yaml)
+      containers:
+        - name: postgres # name of container
+          image: postgres #url of image dockerId/image-name
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-storage #identical to volume name on line # 16
+              mountPath: /var/lib/postgresql/data
+              subPath: postgres
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pgpassword
+                  key: PGPASSWORD

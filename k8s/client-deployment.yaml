@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment # pod, service or deployment
+metadata:
+  name: client-deployment # name of deployment
+spec:
+  replicas: 3 # no of instances
+  selector:
+    matchLabels:
+      component: web # selector of container
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: client # name of container
+          image: awais1331/multi-client #url of image dockerId/image-name
+          ports:
+            - containerPort: 3000
