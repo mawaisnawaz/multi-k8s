@@ -10,3 +10,8 @@ before_install:
   - gcloud config set project multi-k8s-280219
   - gcloud config set compute/zone asia-east1-a
   - gcloud container clusters get-credentials multi-cluster
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t awais1331/docker-react -f ./client/Dockerfile.dev ./client
+
+  script: 
+    - docker run -e CI=true awais1331/docker-react npm run test
