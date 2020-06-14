@@ -11,11 +11,11 @@ metadata:
 spec:
   tls:
     - hosts:
-        - shadi-hub.xyz
-        - www.shadi-hub.xyz
+        - shadihub.xyz
+        - www.shadihub.xyz
       secretName: shadi-hub-xyz
   rules:
-    - host: shadi-hub.xyz
+    - host: shadihub.xyz
       http:
         paths:
           - path: /?(.*)
@@ -28,7 +28,7 @@ spec:
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 5000
-    - host: www.shadi-hub.xyz
+    - host: www.shadihub.xyz
       http:
         paths:
           - path: /?(.*)
