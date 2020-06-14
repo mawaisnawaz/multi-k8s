@@ -3,7 +3,7 @@ kind: Deployment # pod, service or deployment
 metadata:
   name: client-deployment # name of deployment
 spec:
-  replicas: 3 # no of instances
+  replicas: 1 # no of instances
   selector:
     matchLabels:
       component: web # selector of container

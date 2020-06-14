@@ -1,20 +1,20 @@
 apiVersion: cert-manager.io/v1alpha2
 kind: Certificate
 metadata:
-  name: shadi-hub-xyz-tls
+  name: k8s-multi-pods-com-tls
 spec:
-  secretName: shadi-hub-xyz
+  secretName: k8s-multi-pods-com
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
-  commonName: shadihub.xyz
+  commonName: k8s-multi-pods.com
   dnsNames:
-    - shadihub.xyz
-    - www.shadihub.xyz
+    - k8s-multi-pods.com
+    - www.k8s-multi-pods.com
   acme:
     config:
       - http01:
           ingressClass: nginx
         domains:
-          - shadihub.xyz
-          - www.shadihub.xyz
+          - k8s-multi-pods.com
+          - www.k8s-multi-pods.com

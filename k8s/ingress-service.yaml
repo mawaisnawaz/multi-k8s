@@ -5,39 +5,34 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    # UPDATE THIS LINE ABOVE
+    certmanager.k8s.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   tls:
     - hosts:
-        - shadihub.xyz
-        - www.shadihub.xyz
-      secretName: shadi-hub-xyz
+        - k8s-multi-pods.com
+        - www.k8s-multi-pods.com
+      secretName: k8s-multi-pods-com
   rules:
-    - host: shadihub.xyz
+    - host: k8s-multi-pods.com
       http:
         paths:
           - path: /?(.*)
-            # UPDATE THIS LINE ABOVE
             backend:
               serviceName: client-cluster-ip-service
               servicePort: 3000
           - path: /api/?(.*)
-            # UPDATE THIS LINE ABOVE
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 5000
-    - host: www.shadihub.xyz
+    - host: www.k8s-multi-pods.com
       http:
         paths:
           - path: /?(.*)
-            # UPDATE THIS LINE ABOVE
             backend:
               serviceName: client-cluster-ip-service
               servicePort: 3000
           - path: /api/?(.*)
-            # UPDATE THIS LINE ABOVE
             backend:
               serviceName: server-cluster-ip-service
               servicePort: 5000
